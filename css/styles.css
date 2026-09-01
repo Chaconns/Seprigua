@@ -37,14 +37,270 @@ body {
   min-width: 0
 }
 
+/* =====================================================
+   FONDO GLOBAL SEPRIGUA
+   ===================================================== */
+
+:root {
+  --bg-parallax-x: 0px;
+  --bg-parallax-y: 0px;
+  --bg-scroll-y: 0px;
+}
+
+body {
+  position: relative;
+  background: #edf4fa;
+}
+
+
+/* CAPA GLOBAL */
+.site-background {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  background:
+
+    radial-gradient(circle at 18% 14%,
+      rgba(255, 255, 255, .95) 0,
+      rgba(255, 255, 255, .52) 19%,
+      transparent 43%),
+
+    radial-gradient(circle at 82% 30%,
+      rgba(210, 224, 239, .58) 0,
+      rgba(225, 235, 245, .28) 25%,
+      transparent 54%),
+
+    radial-gradient(circle at 42% 84%,
+      rgba(255, 255, 255, .82) 0,
+      rgba(231, 239, 247, .30) 28%,
+      transparent 57%),
+
+    linear-gradient(135deg,
+      #edf4fa 0%,
+      #f7fafc 34%,
+      #e7eff7 68%,
+      #f5f8fb 100%);
+}
+
+
+/* ILUMINACIÓN DIFUSA */
+.site-background::before {
+  content: "";
+  position: absolute;
+  width: 65vw;
+  height: 65vw;
+  min-width: 720px;
+  min-height: 720px;
+
+  top: -30vw;
+  left: 18%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(circle,
+      rgba(255, 255, 255, .78),
+      rgba(255, 255, 255, .15) 42%,
+      transparent 70%);
+
+  filter: blur(18px);
+
+  animation:
+    sepriguaAmbientGlow 18s ease-in-out infinite alternate;
+}
+
+
+/* TEXTURA DE PUNTOS MUY SUAVE */
+.site-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: .16;
+
+  background-image:
+    radial-gradient(circle,
+      rgba(35, 76, 118, .28) .75px,
+      transparent .9px);
+
+  background-size:
+    17px 17px;
+
+  mask-image:
+    radial-gradient(ellipse at 95% 42%,
+      #000 0%,
+      transparent 32%);
+
+  -webkit-mask-image:
+    radial-gradient(ellipse at 95% 42%,
+      #000 0%,
+      transparent 32%);
+
+  animation:
+    sepriguaDots 30s linear infinite;
+}
+
+
+/* PARALLAX */
+.site-background-motion {
+  position: absolute;
+  inset: -8%;
+
+  width: 116%;
+  height: 116%;
+
+  transform:
+    translate3d(var(--bg-parallax-x),
+      calc(var(--bg-parallax-y) + var(--bg-scroll-y)),
+      0);
+
+  transition:
+    transform .9s cubic-bezier(.22, .61, .36, 1);
+
+  will-change: transform;
+}
+
+
+/* SVG */
+.site-background-waves {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+
+  opacity: .95;
+}
+
+
+/* ONDAS */
+.wave-group {
+  transform-box: fill-box;
+  transform-origin: center;
+
+  will-change: transform;
+}
+
+.wave-group-a {
+  animation:
+    sepriguaWaveA 20s ease-in-out infinite alternate;
+}
+
+.wave-group-b {
+  animation:
+    sepriguaWaveB 27s ease-in-out infinite alternate;
+}
+
+.wave-group-c {
+  animation:
+    sepriguaWaveC 24s ease-in-out infinite alternate;
+}
+
+
+/* MOVIMIENTO ONDA SUPERIOR */
+@keyframes sepriguaWaveA {
+
+  0% {
+    transform:
+      translate3d(-1.8%, -1%, 0) scale(1.02);
+  }
+
+  50% {
+    transform:
+      translate3d(1%, 1.4%, 0) scale(1.035);
+  }
+
+  100% {
+    transform:
+      translate3d(2.3%, -.4%, 0) scale(1.015);
+  }
+
+}
+
+
+/* MOVIMIENTO ONDA CENTRAL */
+@keyframes sepriguaWaveB {
+
+  0% {
+    transform:
+      translate3d(2%, 1%, 0) scale(1.03);
+  }
+
+  50% {
+    transform:
+      translate3d(-1%, -1.1%, 0) scale(1.015);
+  }
+
+  100% {
+    transform:
+      translate3d(-2%, 1.4%, 0) scale(1.04);
+  }
+
+}
+
+
+/* MOVIMIENTO ONDA INFERIOR */
+@keyframes sepriguaWaveC {
+
+  0% {
+    transform:
+      translate3d(-1%, 1%, 0) scale(1.025);
+  }
+
+  100% {
+    transform:
+      translate3d(2%, -1.4%, 0) scale(1.045);
+  }
+
+}
+
+
+/* LUZ AMBIENTE */
+@keyframes sepriguaAmbientGlow {
+
+  from {
+    transform:
+      translate3d(-6%, -3%, 0) scale(.96);
+
+    opacity: .55;
+  }
+
+  to {
+    transform:
+      translate3d(8%, 5%, 0) scale(1.08);
+
+    opacity: .92;
+  }
+
+}
+
+
+/* TEXTURA */
+@keyframes sepriguaDots {
+
+  from {
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  to {
+    transform:
+      translate3d(-34px, 17px, 0);
+  }
+
+}
+
 body.menu-open {
   overflow: hidden
 }
 
 main {
+  position: relative;
+  z-index: 2;
   width: 100%;
   overflow: hidden;
-  background: #edf4fa
+  background: transparent;
 }
 
 img {
@@ -85,15 +341,12 @@ ul {
 }
 
 .hero-section,
-.services-section,
-.work-section {
-  background: linear-gradient(110deg, rgba(244, 249, 253, .22), rgba(247, 250, 253, .28)), url("../assets/img/Fondo.webp") center/cover no-repeat
-}
-
 .about-section,
+.services-section,
 .coverage-section,
+.work-section,
 .contact-section {
-  background: linear-gradient(110deg, rgba(244, 249, 253, .20), rgba(247, 250, 253, .24)), url("../assets/img/fondo2.webp") center/cover no-repeat
+  background: transparent;
 }
 
 .section-label {
@@ -223,17 +476,27 @@ ul {
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.85), 0 5px 14px rgba(13, 43, 75, .07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .85), 0 5px 14px rgba(13, 43, 75, .07);
   transition: transform .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease;
 }
-.system-login-link svg { width: 16px; height: 16px; stroke-width: 2; }
+
+.system-login-link svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
 .system-login-link:hover {
   transform: translateY(-2px);
   background: linear-gradient(145deg, #e7ebef, #dce2e7);
   color: var(--blue);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 9px 20px rgba(13, 43, 75, .11);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 9px 20px rgba(13, 43, 75, .11);
 }
-.system-login-link:focus-visible { outline: 3px solid rgba(12,78,145,.22); outline-offset: 3px; }
+
+.system-login-link:focus-visible {
+  outline: 3px solid rgba(12, 78, 145, .22);
+  outline-offset: 3px;
+}
 
 
 
@@ -244,6 +507,7 @@ ul {
   padding-bottom: 74px;
   min-height: 930px
 }
+
 .hero-container {
   position: relative;
   height: 560px
@@ -459,7 +723,7 @@ ul {
   overflow: visible
 }
 
-.about-small-images > img {
+.about-small-images>img {
   width: 100%;
   height: 100%;
   min-height: 0;
@@ -2030,7 +2294,8 @@ ul {
     padding-top: 96px;
     padding-bottom: 54px
   }
-.hero-container {
+
+  .hero-container {
     height: auto;
     display: flex;
     flex-direction: column;
@@ -2782,10 +3047,21 @@ ul {
 }
 
 @media (max-width: 1240px) and (min-width: 901px) {
-  .navbar { padding-left: 24px; padding-right: 24px; }
-  .nav-menu { gap: 15px; }
-  .system-login-link { padding: 0 13px; font-size: 11px; }
+  .navbar {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .nav-menu {
+    gap: 15px;
+  }
+
+  .system-login-link {
+    padding: 0 13px;
+    font-size: 11px;
+  }
 }
+
 @media (max-width: 900px) {
   .system-login-link {
     width: 100%;
@@ -2796,5 +3072,9 @@ ul {
     border-radius: 14px;
     font-size: 15px;
   }
-  .system-login-link svg { width: 19px; height: 19px; }
+
+  .system-login-link svg {
+    width: 19px;
+    height: 19px;
+  }
 }
