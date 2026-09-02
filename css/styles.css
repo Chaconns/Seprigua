@@ -542,37 +542,230 @@ ul {
   color: #3b5c7c
 }
 
+/* =====================================================
+   BOTÓN VER SERVICIOS — ANIMACIÓN PREMIUM
+   ===================================================== */
+
 .primary-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  min-width: 188px;
+  height: 58px;
+
   display: inline-flex;
   align-items: center;
-  gap: 23px;
-  padding: 14px 14px 14px 28px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #073a79, #075898);
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 7px 7px 7px 26px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(135deg,
+      #073a79 0%,
+      #075899 100%);
+
   color: #fff;
+
   font-size: 14px;
   font-weight: 700;
-  box-shadow: 0 12px 26px rgba(4, 54, 111, .24);
-  transition: .25s
+
+  box-shadow:
+    0 12px 26px rgba(4, 54, 111, .24);
+
+  transition:
+    transform .45s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .45s ease;
+
+  cursor: pointer;
 }
 
-.primary-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 34px rgba(4, 54, 111, .30)
+
+/* CAPA AZUL QUE SE EXPANDE DESDE LA FLECHA */
+.primary-button::before {
+  content: "";
+
+  position: absolute;
+  z-index: -1;
+
+  right: 7px;
+  top: 50%;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(135deg,
+      #0A6BFF,
+      #0758D7);
+
+  transform:
+    translateY(-50%) scale(1);
+
+  transform-origin: right center;
+
+  transition:
+    width .65s cubic-bezier(.16, 1, .3, 1),
+    height .65s cubic-bezier(.16, 1, .3, 1),
+    right .65s cubic-bezier(.16, 1, .3, 1),
+    border-radius .65s cubic-bezier(.16, 1, .3, 1);
 }
 
+
+/* BRILLO QUE RECORRE EL BOTÓN */
+.primary-button::after {
+  content: "";
+
+  position: absolute;
+  z-index: 3;
+
+  top: -70%;
+  left: -45%;
+
+  width: 30%;
+  height: 240%;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, .23),
+      transparent);
+
+  transform:
+    rotate(18deg) translateX(-280%);
+
+  transition:
+    transform .8s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* TEXTO */
+.primary-button>span:first-child {
+  position: relative;
+  z-index: 4;
+
+  transition:
+    transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* CÍRCULO DE FLECHA */
 .button-circle {
-  width: 31px;
-  height: 31px;
+  position: relative;
+  z-index: 5;
+
+  width: 44px;
+  height: 44px;
+
+  flex: 0 0 44px;
+
   display: grid;
   place-items: center;
-  border-radius: 50%;
+
+  border-radius: 11px;
+
   background: #fff;
-  color: var(--blue)
+
+  color: #0753A0;
+
+  box-shadow:
+    0 5px 15px rgba(0, 35, 80, .13);
+
+  transition:
+    transform .55s cubic-bezier(.22, 1, .36, 1),
+    background .4s ease,
+    color .4s ease,
+    box-shadow .4s ease;
 }
 
+
 .button-circle svg {
-  width: 17px
+  width: 19px;
+  height: 19px;
+
+  stroke-width: 2.3;
+
+  transition:
+    transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* =====================================================
+   HOVER
+   ===================================================== */
+
+.primary-button:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 38px rgba(4, 74, 160, .29);
+}
+
+
+/* El azul brillante se extiende por todo el botón */
+.primary-button:hover::before {
+  width: calc(100% - 14px);
+  height: 44px;
+
+  right: 7px;
+
+  border-radius: 11px;
+}
+
+
+/* Shine */
+.primary-button:hover::after {
+  transform:
+    rotate(18deg) translateX(650%);
+}
+
+
+/* Pequeño movimiento del texto */
+.primary-button:hover>span:first-child {
+  transform: translateX(3px);
+}
+
+
+/* Flecha se impulsa */
+.primary-button:hover .button-circle {
+  transform:
+    translateX(-2px) scale(.94);
+
+  background:
+    rgba(255, 255, 255, .97);
+
+  box-shadow:
+    0 6px 18px rgba(0, 38, 90, .17);
+}
+
+
+.primary-button:hover .button-circle svg {
+  transform: translateX(4px);
+}
+
+
+/* Al presionarlo */
+.primary-button:active {
+  transform:
+    translateY(-1px) scale(.985);
+
+  transition-duration: .12s;
+}
+
+
+/* Accesibilidad */
+.primary-button:focus-visible {
+  outline:
+    3px solid rgba(10, 107, 255, .28);
+
+  outline-offset: 4px;
 }
 
 .hero-image-container {
