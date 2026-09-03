@@ -1085,6 +1085,33 @@
     <script src="java/about-entry-motion.js?v=44"></script>
     <script src="java/services-explorer.js?v=48"></script>
     <script src="java/navbar-gear-indicator.js?v=56"></script>
+
+    <!-- Botón Flotante del Chatbot -->
+    <a href="SEPRIGUA%20CHATBOT.html" class="chatbot-flotante" title="Abrir Chatbot">💬</a>
+
+    <style>
+      .chatbot-flotante {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #007bff;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        transition: transform 0.2s ease;
+      }
+      .chatbot-flotante:hover {
+        transform: scale(1.1);
+      }
+    </style>
 </body>
 
 </html>
